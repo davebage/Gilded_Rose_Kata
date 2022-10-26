@@ -51,5 +51,35 @@ namespace csharp
             Assert.AreEqual(4, Items[0].SellIn);
             Assert.AreEqual(quality, Items[0].Quality);
         }
+
+        [Test]
+        [TestCase(10, 8, 10)]
+        [TestCase(5, 8, 11)]
+        [TestCase(14, 8, 9)]
+        public void Update_Quality_For_Backstage_Pass_Reduce_Sell_In_And_Increase_Quality(
+            int sellIn, 
+            int actualQuality,
+            int expectedQuality)
+        {
+            // Arrange 
+            var Items = new List<Item>
+            {
+                new Item
+                {
+                    Name = "Backstage passes to a TAFKAL80ETC concert",
+                    SellIn = sellIn,
+                    Quality = actualQuality
+                }
+            };
+            var app = new GildedRose(Items);
+
+            // Act
+            app.UpdateQuality();
+
+            // Assert 
+            Assert.AreEqual("Backstage passes to a TAFKAL80ETC concert", Items[0].Name);
+            Assert.AreEqual(sellIn - 1, Items[0].SellIn);
+            Assert.AreEqual(expectedQuality, Items[0].Quality);
+        }
     }
 }
