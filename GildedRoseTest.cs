@@ -32,5 +32,24 @@ namespace csharp
             Assert.AreEqual(4, Items[0].SellIn);
             Assert.AreEqual(8, Items[0].Quality);
         }
+
+        [Test]
+        [TestCase(50)]
+        [TestCase(51)]
+        [TestCase(52)]
+        public void Update_Quality_For_Aged_Brie_Reduce_Sell_In(int quality)
+        {
+            // Arrange 
+            var Items = new List<Item> { new Item { Name = "Aged Brie", SellIn = 5, Quality = quality } };
+            var app = new GildedRose(Items);
+
+            // Act
+            app.UpdateQuality();
+
+            // Assert 
+            Assert.AreEqual("Aged Brie", Items[0].Name);
+            Assert.AreEqual(4, Items[0].SellIn);
+            Assert.AreEqual(quality, Items[0].Quality);
+        }
     }
 }
