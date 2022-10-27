@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using System.Collections.Generic;
 
 namespace csharp
@@ -106,6 +107,32 @@ namespace csharp
             Assert.AreEqual("Apple", Items[0].Name);
             Assert.AreEqual(sellIn - 1, Items[0].SellIn);
             Assert.AreEqual(actualQuality-2, Items[0].Quality);
+        }
+
+        [Test]
+        [TestCase(1)]
+        [TestCase(0)]
+        [TestCase(-1)]
+        public void Quality_Of_An_Item_Never_Gets_Below_Zero(int sellIn)
+        {
+            var Items = new List<Item>()
+            {
+                new Item()
+                {
+                    Name = "Apple",
+                    SellIn = sellIn,
+                    Quality = 0
+                }
+            };
+            var app = new GildedRose(Items);
+            
+            // Act
+            app.UpdateQuality();
+            
+            // Assert
+            Assert.AreEqual("Apple", Items[0].Name);
+            Assert.AreEqual(sellIn - 1, Items[0].SellIn);
+            Assert.AreEqual(0, Items[0].Quality);
         }
     }
 }
