@@ -82,5 +82,30 @@ namespace csharp
             Assert.AreEqual(sellIn - 1, Items[0].SellIn);
             Assert.AreEqual(expectedQuality, Items[0].Quality);
         }
+
+        [Test]
+        [TestCase(0, 5)]
+        [TestCase(-1, 2)]
+        public void Quality_Degrades_By_Two_When_Past_Sell_By_Date(int sellIn, int actualQuality)
+        {
+            var Items = new List<Item>
+            {
+                new Item
+                {
+                    Name = "Apple",
+                    SellIn = sellIn,
+                    Quality = actualQuality
+                }
+            };
+            var app = new GildedRose(Items);
+
+            // Act
+            app.UpdateQuality();
+
+            // Assert 
+            Assert.AreEqual("Apple", Items[0].Name);
+            Assert.AreEqual(sellIn - 1, Items[0].SellIn);
+            Assert.AreEqual(actualQuality-2, Items[0].Quality);
+        }
     }
 }
