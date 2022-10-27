@@ -56,6 +56,7 @@ namespace csharp
         [TestCase(10, 8, 10)]
         [TestCase(5, 8, 11)]
         [TestCase(14, 8, 9)]
+        [TestCase(0, 8, 0)]
         public void Update_Quality_For_Backstage_Pass_Reduce_Sell_In_And_Increase_Quality(
             int sellIn, 
             int actualQuality,
