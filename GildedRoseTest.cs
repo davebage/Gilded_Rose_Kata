@@ -19,10 +19,13 @@ namespace csharp
         }
 
         [Test]
-        public void Update_Quality_For_Aged_Brie_Reduce_Sell_In_And_Increase_Quality()
+        [TestCase(10,  10, 11)]
+        [TestCase(-1, 10, 12)]
+        [TestCase(-1, 49, 50)]
+        public void Update_Quality_For_Aged_Brie_Reduce_Sell_In_And_Increase_Quality(int sellIn, int quality, int expectedQuality)
         {
             // Arrange 
-            var Items = new List<Item> { new Item { Name = "Aged Brie", SellIn = 5, Quality = 7 } };
+            var Items = new List<Item> { new Item { Name = "Aged Brie", SellIn = sellIn, Quality = quality } };
             var app = new GildedRose(Items);
             
             // Act
@@ -30,8 +33,8 @@ namespace csharp
             
             // Assert 
             Assert.AreEqual("Aged Brie", Items[0].Name);
-            Assert.AreEqual(4, Items[0].SellIn);
-            Assert.AreEqual(8, Items[0].Quality);
+            Assert.AreEqual(sellIn-1, Items[0].SellIn);
+            Assert.AreEqual(expectedQuality, Items[0].Quality);
         }
 
         [Test]
@@ -133,6 +136,33 @@ namespace csharp
             Assert.AreEqual("Apple", Items[0].Name);
             Assert.AreEqual(sellIn - 1, Items[0].SellIn);
             Assert.AreEqual(0, Items[0].Quality);
+        }
+
+        [Test]
+        [TestCase("Aged Brie", 1)]
+        [TestCase("Aged Brie", -1)]
+        [TestCase("Backstage passes to a TAFKAL80ETC concert",1)]
+        [TestCase("Backstage passes to a TAFKAL80ETC concert", 10)]
+        public void Quality_Of_An_Item_Never_More_Than_Fifty(string product, int sellIn)
+        {
+            var Items = new List<Item>()
+            {
+                new Item()
+                {
+                    Name = product,
+                    SellIn = sellIn,
+                    Quality = 50
+                }
+            };
+            var app = new GildedRose(Items);
+
+            // Act
+            app.UpdateQuality();
+
+            // Assert
+            Assert.AreEqual(product, Items[0].Name);
+            Assert.AreEqual(sellIn - 1, Items[0].SellIn);
+            Assert.AreEqual(50, Items[0].Quality);
         }
     }
 }
