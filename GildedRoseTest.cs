@@ -164,5 +164,32 @@ namespace csharp
             Assert.AreEqual(sellIn - 1, Items[0].SellIn);
             Assert.AreEqual(50, Items[0].Quality);
         }
+
+        [Test]
+        [TestCase(1, 50)]
+        [TestCase(0, 80)]
+        [TestCase(-1, 100)]
+        public void Legendary_Item_Should_Not_Decrease_Sell_In_And_Quality(int sellIn, int quality)
+        {
+            const string productName = "Sulfuras, Hand of Ragnaros";
+            var Items = new List<Item>()
+            {
+                new Item()
+                {
+                    Name = productName,
+                    SellIn = sellIn,
+                    Quality = quality
+                }
+            };
+            var app = new GildedRose(Items);
+
+            // Act
+            app.UpdateQuality();
+
+            // Assert
+            Assert.AreEqual(productName, Items[0].Name);
+            Assert.AreEqual(sellIn, Items[0].SellIn);
+            Assert.AreEqual(quality, Items[0].Quality);
+        }
     }
 }
