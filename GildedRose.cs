@@ -4,6 +4,8 @@ namespace csharp
 {
     public class GildedRose
     {
+        const int REGULAR_ITEM_MAXIMUM_QUALITY = 50;
+        
         IList<Item> Items;
         public GildedRose(IList<Item> Items)
         {
@@ -26,27 +28,18 @@ namespace csharp
                 }
                 else
                 {
-                    if (Items[i].Quality < 50)
+                    IncreaseItemQuality(Items[i]);
+                    
+                    if (Items[i].Name == "Backstage passes to a TAFKAL80ETC concert")
                     {
-                        IncreaseItemQuality(Items[i]);
-
-                        if (Items[i].Name == "Backstage passes to a TAFKAL80ETC concert")
+                        if (Items[i].SellIn < 11)
                         {
-                            if (Items[i].SellIn < 11)
-                            {
-                                if (Items[i].Quality < 50)
-                                {
-                                    IncreaseItemQuality(Items[i]);
-                                }
-                            }
+                            IncreaseItemQuality(Items[i]);
+                        }
 
-                            if (Items[i].SellIn < 6)
-                            {
-                                if (Items[i].Quality < 50)
-                                {
-                                    IncreaseItemQuality(Items[i]);
-                                }
-                            }
+                        if (Items[i].SellIn < 6)
+                        {
+                            IncreaseItemQuality(Items[i]);
                         }
                     }
                 }
@@ -58,7 +51,11 @@ namespace csharp
 
                 if (Items[i].SellIn < 0)
                 {
-                    if (Items[i].Name != "Aged Brie")
+                    if (Items[i].Name == "Aged Brie")
+                    {
+                        IncreaseItemQuality(Items[i]);
+                    }
+                    else
                     {
                         if (Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
                         {
@@ -73,13 +70,6 @@ namespace csharp
                         else
                         {
                             Items[i].Quality = 0;
-                        }
-                    }
-                    else
-                    {
-                        if (Items[i].Quality < 50)
-                        {
-                            IncreaseItemQuality(Items[i]);
                         }
                     }
                 }
@@ -98,7 +88,8 @@ namespace csharp
 
         private void IncreaseItemQuality(Item item)
         {
-            item.Quality++;
+            if (item.Quality < REGULAR_ITEM_MAXIMUM_QUALITY) 
+                item.Quality++;
         }
     }
 }
