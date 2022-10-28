@@ -53,7 +53,7 @@ namespace csharp
 
                 if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
                 {
-                    Items[i].SellIn = Items[i].SellIn - 1;
+                    DecreaseSellIn(Items[i]);
                 }
 
                 if (Items[i].SellIn < 0)
@@ -72,7 +72,7 @@ namespace csharp
                         }
                         else
                         {
-                            Items[i].Quality = Items[i].Quality - Items[i].Quality;
+                            Items[i].Quality = 0;
                         }
                     }
                     else
@@ -84,6 +84,11 @@ namespace csharp
                     }
                 }
             }
+        }
+
+        private void DecreaseSellIn(Item item)
+        {
+            item.SellIn--;
         }
 
         private void DecreaseItemQuality(Item item)
