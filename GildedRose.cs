@@ -5,7 +5,7 @@ namespace csharp
     public class GildedRose
     {
         const int REGULAR_ITEM_MAXIMUM_QUALITY = 50;
-        
+
         IList<Item> Items;
         public GildedRose(IList<Item> Items)
         {
@@ -18,18 +18,15 @@ namespace csharp
             {
                 if (Items[i].Name != "Aged Brie" && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
                 {
-                    if (Items[i].Quality > 0)
+                    if (Items[i].Quality > 0 && Items[i].Name != "Sulfuras, Hand of Ragnaros")
                     {
-                        if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
-                        {
-                            DecreaseItemQuality(Items[i]);
-                        }
+                        DecreaseItemQuality(Items[i]);
                     }
                 }
                 else
                 {
                     IncreaseItemQuality(Items[i]);
-                    
+
                     if (Items[i].Name == "Backstage passes to a TAFKAL80ETC concert")
                     {
                         if (Items[i].SellIn < 11)
@@ -59,12 +56,9 @@ namespace csharp
                     {
                         if (Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
                         {
-                            if (Items[i].Quality > 0)
+                            if (Items[i].Quality > 0 && Items[i].Name != "Sulfuras, Hand of Ragnaros")
                             {
-                                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
-                                {
-                                    DecreaseItemQuality(Items[i]);
-                                }
+                                DecreaseItemQuality(Items[i]);
                             }
                         }
                         else
@@ -88,7 +82,7 @@ namespace csharp
 
         private void IncreaseItemQuality(Item item)
         {
-            if (item.Quality < REGULAR_ITEM_MAXIMUM_QUALITY) 
+            if (item.Quality < REGULAR_ITEM_MAXIMUM_QUALITY)
                 item.Quality++;
         }
     }
