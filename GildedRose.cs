@@ -43,11 +43,8 @@ namespace csharp
                     DecreaseItemQuality(Items[i]);
                 }
 
-                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
-                {
-                    DecreaseSellIn(Items[i]);
-                }
-
+                DecreaseSellIn(Items[i]);
+                
                 if (Items[i].SellIn < 0)
                 {
                     if (Items[i].Name == "Aged Brie")
