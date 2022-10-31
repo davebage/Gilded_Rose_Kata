@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace csharp
 {
@@ -15,42 +16,36 @@ namespace csharp
 
         public void UpdateQuality()
         {
-            for (var i = 0; i < Items.Count; i++)
+            foreach (var item in Items)
             {
-                if(Items[i].Name == "Sulfuras, Hand of Ragnaros")
+                if(item.Name == "Sulfuras, Hand of Ragnaros")
                     continue;
 
-                if (Items[i].Name == "Aged Brie"
-                    || Items[i].Name == "Backstage passes to a TAFKAL80ETC concert")
+                if (item.Name == "Aged Brie")
                 {
-                    IncreaseItemQuality(Items[i]);
+                    IncreaseItemQuality(item);
+                }
+                else if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
+                {
+                    IncreaseItemQuality(item);
+                
+                    if (item.SellIn < 11)
+                    {
+                        IncreaseItemQuality(item);
+                    }
 
-                    ProcessBackstagePass(Items[i]);
+                    if (item.SellIn < 6)
+                    {
+                        IncreaseItemQuality(item);
+                    }
                 }
                 else
                 {
-                    DecreaseItemQuality(Items[i]);
+                    DecreaseItemQuality(item);
                 }
 
-                DecreaseSellIn(Items[i]);
-                
-                EndOfDayProcess(Items[i]);
-            }
-        }
-
-        private void ProcessBackstagePass(Item item)
-        {
-            if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
-            {
-                if (item.SellIn < 11)
-                {
-                    IncreaseItemQuality(item);
-                }
-
-                if (item.SellIn < 6)
-                {
-                    IncreaseItemQuality(item);
-                }
+                DecreaseSellIn(item);
+                EndOfDayProcess(item);
             }
         }
 
