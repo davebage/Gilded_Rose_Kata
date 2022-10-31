@@ -25,18 +25,7 @@ namespace csharp
                 {
                     IncreaseItemQuality(Items[i]);
 
-                    if (Items[i].Name == "Backstage passes to a TAFKAL80ETC concert")
-                    {
-                        if (Items[i].SellIn < 11)
-                        {
-                            IncreaseItemQuality(Items[i]);
-                        }
-
-                        if (Items[i].SellIn < 6)
-                        {
-                            IncreaseItemQuality(Items[i]);
-                        }
-                    }
+                    ProcessBackstagePass(Items[i]);
                 }
                 else
                 {
@@ -46,6 +35,22 @@ namespace csharp
                 DecreaseSellIn(Items[i]);
                 
                 EndOfDayProcess(Items[i]);
+            }
+        }
+
+        private void ProcessBackstagePass(Item item)
+        {
+            if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
+            {
+                if (item.SellIn < 11)
+                {
+                    IncreaseItemQuality(item);
+                }
+
+                if (item.SellIn < 6)
+                {
+                    IncreaseItemQuality(item);
+                }
             }
         }
 
