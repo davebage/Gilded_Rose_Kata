@@ -45,22 +45,25 @@ namespace csharp
 
                 DecreaseSellIn(Items[i]);
                 
-                if (Items[i].SellIn < 0)
-                {
-                    if (Items[i].Name == "Aged Brie")
-                    {
-                        IncreaseItemQuality(Items[i]);
-                    }
-                    else if (Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
-                    {
-                        DecreaseItemQuality(Items[i]);
-                    }
-                }
+                EndOfDayProcess(Items[i]);
+            }
+        }
 
-                if (Items[i].SellIn < 0 && Items[i].Name == "Backstage passes to a TAFKAL80ETC concert")
-                {
-                    Items[i].Quality = 0;
-                }
+        private void EndOfDayProcess(Item item)
+        {
+            if (item.SellIn >= 0) return;
+
+            if (item.Name == "Aged Brie")
+            {
+                IncreaseItemQuality(item);
+            }
+            else if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
+            {
+                item.Quality = 0;
+            }
+            else
+            {
+                DecreaseItemQuality(item);
             }
         }
 
