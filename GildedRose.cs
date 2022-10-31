@@ -52,20 +52,17 @@ namespace csharp
                     {
                         IncreaseItemQuality(Items[i]);
                     }
-                    else
+                    else if (Items[i].Quality > 0 &&
+                            Items[i].Name != "Backstage passes to a TAFKAL80ETC concert" &&
+                            Items[i].Name != "Sulfuras, Hand of Ragnaros")
                     {
-                        if (Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
-                        {
-                            if (Items[i].Quality > 0 && Items[i].Name != "Sulfuras, Hand of Ragnaros")
-                            {
-                                DecreaseItemQuality(Items[i]);
-                            }
-                        }
-                        else
-                        {
-                            Items[i].Quality = 0;
-                        }
+                        DecreaseItemQuality(Items[i]);
                     }
+                }
+
+                if (Items[i].SellIn < 0 && Items[i].Name == "Backstage passes to a TAFKAL80ETC concert")
+                {
+                    Items[i].Quality = 0;
                 }
             }
         }
