@@ -62,6 +62,7 @@
     <Compile Include="ApprovalTest.cs" />
     <Compile Include="BackstagePassProcess.cs" />
     <Compile Include="GildedRose.cs" />
+    <Compile Include="GildedRoseProduct.cs" />
     <Compile Include="GildedRoseTest.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="AgedBrieItemProcess.cs" />

@@ -17,7 +17,6 @@ namespace csharp
                 if(item.Name == "Sulfuras, Hand of Ragnaros")
                     continue;
 
-                DecreaseSellIn(item);
                 if (item.Name == "Aged Brie")
                 {
                     var agedBrieItemProcess  = new AgedBrieItemProcess();
@@ -27,7 +26,6 @@ namespace csharp
                 {
                     var backstagePassProcess = new BackstagePassProcess();
                     backstagePassProcess.Process(item);
-
                 }
                 else
                 {
@@ -35,11 +33,6 @@ namespace csharp
                     regularItemProcess.Process(item);
                 }
             }
-        }
-
-        private void DecreaseSellIn(Item item)
-        {
-            item.SellIn--;
         }
     }
 }
