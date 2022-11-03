@@ -1,6 +1,6 @@
 ﻿namespace csharp
 {
-    public class BackstagePassProcess : GildedRoseProduct
+    public class BackstagePassProcess : GildedRoseProduct, IGuildedRoseItemProcess
     {
         public void Process(Item item)
         {
