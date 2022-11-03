@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="ApprovalTest.cs" />
     <Compile Include="BackstagePassProcess.cs" />
+    <Compile Include="ConjuredItemProcess.cs" />
     <Compile Include="GildedRose.cs" />
     <Compile Include="GildedRoseProduct.cs" />
     <Compile Include="GildedRoseTest.cs" />

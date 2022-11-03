@@ -191,5 +191,17 @@ namespace csharp
             Assert.AreEqual(sellIn, Items[0].SellIn);
             Assert.AreEqual(quality, Items[0].Quality);
         }
+
+        [Test]
+        public void Update_Quality_For_Conjured_Item_Reduce_Quality_By_Two()
+        {
+            IList<Item> Items = new List<Item> { new Item { Name = "Conjured Item", SellIn = 5, Quality = 7 } };
+            GildedRose app = new GildedRose(Items);
+            app.UpdateQuality();
+            Assert.AreEqual("Conjured Item", Items[0].Name);
+            Assert.AreEqual(4, Items[0].SellIn);
+            Assert.AreEqual(5, Items[0].Quality);
+        }
+
     }
 }

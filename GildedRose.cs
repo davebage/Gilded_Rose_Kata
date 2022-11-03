@@ -16,6 +16,7 @@ namespace csharp
             gildedFactor.Add("Aged Brie", new AgedBrieItemProcess());
             gildedFactor.Add("Backstage passes to a TAFKAL80ETC concert", new BackstagePassProcess());
             gildedFactor.Add("Sulfuras, Hand of Ragnaros", new LegendaryItemProcess());
+            gildedFactor.Add("Conjured Item", new ConjuredItemProcess());
         }
 
         public void UpdateQuality() =>
