@@ -193,14 +193,16 @@ namespace csharp
         }
 
         [Test]
-        public void Update_Quality_For_Conjured_Item_Reduce_Quality_By_Two()
+        [TestCase(5, 7, 5)]
+        [TestCase(5, 1, 0)]
+        public void Update_Quality_For_Conjured_Item_Reduce_Quality_By_Two(int sellIn, int quality, int expectedQuality)
         {
-            IList<Item> Items = new List<Item> { new Item { Name = "Conjured Item", SellIn = 5, Quality = 7 } };
+            IList<Item> Items = new List<Item> { new Item { Name = "Conjured Item", SellIn = sellIn, Quality = quality } };
             GildedRose app = new GildedRose(Items);
             app.UpdateQuality();
             Assert.AreEqual("Conjured Item", Items[0].Name);
-            Assert.AreEqual(4, Items[0].SellIn);
-            Assert.AreEqual(5, Items[0].Quality);
+            Assert.AreEqual(sellIn - 1 , Items[0].SellIn);
+            Assert.AreEqual(expectedQuality, Items[0].Quality);
         }
 
     }
