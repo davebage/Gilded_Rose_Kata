@@ -2,23 +2,20 @@
 {
     public class BackstagePassProcess : GildedRoseProduct
     {
-        const int REGULAR_ITEM_MAXIMUM_QUALITY = 50;
-
         public void Process(Item item)
         {
             DecreaseSellIn(item);
 
-            if (item.Quality < REGULAR_ITEM_MAXIMUM_QUALITY)
-                item.Quality++;
+            IncreaseQuality(item);
 
-            if (item.SellIn < 11 && item.Quality < REGULAR_ITEM_MAXIMUM_QUALITY)
+            if (item.SellIn < 11)
             {
-                item.Quality++;
+                IncreaseQuality(item);
             }
 
-            if (item.SellIn < 6 && item.Quality < REGULAR_ITEM_MAXIMUM_QUALITY)
+            if (item.SellIn < 6)
             {
-                item.Quality++;
+                IncreaseQuality(item);
             }
 
             if (item.SellIn < 0)
