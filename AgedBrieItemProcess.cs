@@ -2,10 +2,17 @@ namespace csharp
 {
     public class AgedBrieItemProcess
     {
-        public void IncreaseItemQuality(Item item)
+        const int REGULAR_ITEM_MAXIMUM_QUALITY = 50;
+        
+        public void Process(Item item)
         {
-            throw new System.NotImplementedException();
+            if (item.Quality < REGULAR_ITEM_MAXIMUM_QUALITY)
+                item.Quality++;
+            
+            if (item.SellIn < 0 && item.Quality < REGULAR_ITEM_MAXIMUM_QUALITY)
+                item.Quality++;
+            
+            // item.SellIn--;
         }
     }
-
 }
