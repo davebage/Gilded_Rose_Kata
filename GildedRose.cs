@@ -21,14 +21,12 @@ namespace csharp
                 if(item.Name == "Sulfuras, Hand of Ragnaros")
                     continue;
 
+                
                 DecreaseSellIn(item);
                 if (item.Name == "Aged Brie")
                 {
-                    IncreaseItemQuality(item);
-
-                    if (item.SellIn < 0)
-                        IncreaseItemQuality(item);
-
+                    var agedBrieItemProcess  = new AgedBrieItemProcess();
+                    agedBrieItemProcess.Process(item);
                 }
                 else if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
                 {
