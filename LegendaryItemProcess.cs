@@ -1,6 +1,6 @@
 ﻿namespace csharp
 {
-    public class LegendaryItemProcess : IGuildedRoseItemProcess
+    public class LegendaryItemProcess : GildedRoseProduct, IGuildedRoseItemProcess
     {
         public void Process(Item item)
         {
