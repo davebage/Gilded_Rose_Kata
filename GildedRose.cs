@@ -1,13 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace csharp
 {
     public class GildedRose
     {
-        const int REGULAR_ITEM_MAXIMUM_QUALITY = 50;
-        const int REGULAR_ITEM_MINIMUM_QUALITY = 0;
-
         IList<Item> Items;
         public GildedRose(IList<Item> Items)
         {
@@ -35,10 +31,8 @@ namespace csharp
                 }
                 else
                 {
-                    DecreaseItemQuality(item);
-                    if (item.SellIn < 0)
-                        DecreaseItemQuality(item);
-
+                    var regularItemProcess = new RegularItemProcess();
+                    regularItemProcess.Process(item);
                 }
             }
         }
@@ -46,18 +40,6 @@ namespace csharp
         private void DecreaseSellIn(Item item)
         {
             item.SellIn--;
-        }
-
-        private void DecreaseItemQuality(Item item)
-        {
-            if(item.Quality > REGULAR_ITEM_MINIMUM_QUALITY)
-                item.Quality--;
-        }
-
-        private void IncreaseItemQuality(Item item)
-        {
-            if (item.Quality < REGULAR_ITEM_MAXIMUM_QUALITY)
-                item.Quality++;
         }
     }
 }
