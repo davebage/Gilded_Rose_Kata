@@ -21,7 +21,6 @@ namespace csharp
                 if(item.Name == "Sulfuras, Hand of Ragnaros")
                     continue;
 
-                
                 DecreaseSellIn(item);
                 if (item.Name == "Aged Brie")
                 {
@@ -30,20 +29,8 @@ namespace csharp
                 }
                 else if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
                 {
-                    IncreaseItemQuality(item);
-                
-                    if (item.SellIn < 11)
-                    {
-                        IncreaseItemQuality(item);
-                    }
-
-                    if (item.SellIn < 6)
-                    {
-                        IncreaseItemQuality(item);
-                    }
-
-                    if (item.SellIn < 0)
-                        item.Quality = 0;
+                    var backstagePassProcess = new BackstagePassProcess();
+                    backstagePassProcess.Process(item);
 
                 }
                 else
